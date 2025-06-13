@@ -1,4 +1,4 @@
-package com.payetonkawa.client.entity;
+package com.payetonkawa.order.entity;
 
 import java.sql.Date;
 
@@ -13,11 +13,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Client {
+public class Order {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_client")
-    private Integer idClient;
+    @Column(name="id_order")
+    private Integer idOrder;
 
     @Column(name="lastname")
     private String lastname;

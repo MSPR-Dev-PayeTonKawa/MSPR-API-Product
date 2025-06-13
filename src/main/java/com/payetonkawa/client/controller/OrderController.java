@@ -1,4 +1,4 @@
-package com.payetonkawa.client.controller;
+package com.payetonkawa.order.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -11,48 +11,47 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.payetonkawa.client.dto.PatchClientDto;
-import com.payetonkawa.client.dto.PostClientDto;
-import com.payetonkawa.client.entity.Client;
-import com.payetonkawa.client.exception.NotAnInsertException;
-import com.payetonkawa.client.mapper.ClientMapper;
-import com.payetonkawa.client.service.ClientService;
+import com.payetonkawa.order.dto.PatchOrderDto;
+import com.payetonkawa.order.dto.PostOrderDto;
+import com.payetonkawa.order.entity.Order;
+import com.payetonkawa.order.mapper.OrderMapper;
+import com.payetonkawa.order.service.OrderService;
 
 @RestController
-@RequestMapping("/clientcontroller")
+@RequestMapping("/order")
 @AllArgsConstructor
-public class ClientController {
+public class OrderController {
 
-    private final ClientService clientService;
-    private final ClientMapper clientMapper;
+    private final OrderService orderService;
+    private final OrderMapper orderMapper;
 
     @GetMapping()
-    public ResponseEntity<List<Client>> findAll() {
+    public ResponseEntity<List<Order>> findAll() {
         try {
-            return new ResponseEntity<>(clientService.findall(), HttpStatus.OK);
+            return new ResponseEntity<>(orderService.findall(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Client> find(@PathVariable Integer id) {
+    public ResponseEntity<Order> find(@PathVariable Integer id) {
         try {
-            Optional<Client> client = clientService.findById(id);
-            if (client.isPresent()) {
-                return new ResponseEntity<>(client.get(), HttpStatus.OK);
+            Optional<Order> order = orderService.findById(id);
+            if (order.isPresent()) {
+                return new ResponseEntity<>(order.get(), HttpStatus.OK);
             }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping()
-    public ResponseEntity<Client> create(@RequestBody PostClientDto dto) {
+    public ResponseEntity<Order> create(@RequestBody PostOrderDto dto) {
         try {
-            return new ResponseEntity<>(clientService.insert(clientMapper.fromPostDto(dto)), HttpStatus.OK);
-        } catch (NotAnInsertException e) {
+            return new ResponseEntity<>(orderService.insert(orderMapper.fromPostDto(dto)), HttpStatus.OK);
+        } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -60,10 +59,10 @@ public class ClientController {
     }
 
     @PutMapping()
-    public ResponseEntity<Client> update(@RequestBody PatchClientDto dto) {
+    public ResponseEntity<Order> update(@RequestBody PatchOrderDto dto) {
         try {
-            return new ResponseEntity<>(clientService.update(clientMapper.fromPatchDto(dto)), HttpStatus.OK);
-        } catch (NotAnInsertException e) {
+            return new ResponseEntity<>(orderService.update(orderMapper.fromPatchDto(dto)), HttpStatus.OK);
+        } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

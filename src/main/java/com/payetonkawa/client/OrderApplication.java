@@ -1,13 +1,13 @@
-package com.payetonkawa.client;
+package com.payetonkawa.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ClientApplication {
+public class OrderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientApplication.class, args);
+		SpringApplication.run(OrderApplication.class, args);
 	}
 
 }
