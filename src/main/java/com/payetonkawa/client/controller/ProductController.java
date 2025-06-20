@@ -1,4 +1,4 @@
-package com.payetonkawa.order.controller;
+package com.payetonkawa.product.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -11,35 +11,35 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.payetonkawa.order.dto.PatchOrderDto;
-import com.payetonkawa.order.dto.PostOrderDto;
-import com.payetonkawa.order.entity.Order;
-import com.payetonkawa.order.mapper.OrderMapper;
-import com.payetonkawa.order.service.OrderService;
+import com.payetonkawa.product.dto.PatchProductDto;
+import com.payetonkawa.product.dto.PostProductDto;
+import com.payetonkawa.product.entity.Product;
+import com.payetonkawa.product.mapper.ProductMapper;
+import com.payetonkawa.product.service.ProductService;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/product")
 @AllArgsConstructor
-public class OrderController {
+public class ProductController {
 
-    private final OrderService orderService;
-    private final OrderMapper orderMapper;
+    private final ProductService productService;
+    private final ProductMapper productMapper;
 
     @GetMapping()
-    public ResponseEntity<List<Order>> findAll() {
+    public ResponseEntity<List<Product>> findAll() {
         try {
-            return new ResponseEntity<>(orderService.findall(), HttpStatus.OK);
+            return new ResponseEntity<>(productService.findall(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> find(@PathVariable Integer id) {
+    public ResponseEntity<Product> find(@PathVariable Integer id) {
         try {
-            Optional<Order> order = orderService.findById(id);
-            if (order.isPresent()) {
-                return new ResponseEntity<>(order.get(), HttpStatus.OK);
+            Optional<Product> product = productService.findById(id);
+            if (product.isPresent()) {
+                return new ResponseEntity<>(product.get(), HttpStatus.OK);
             }
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
@@ -48,9 +48,9 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<Order> create(@RequestBody PostOrderDto dto) {
+    public ResponseEntity<Product> create(@RequestBody PostProductDto dto) {
         try {
-            return new ResponseEntity<>(orderService.insert(orderMapper.fromPostDto(dto)), HttpStatus.OK);
+            return new ResponseEntity<>(productService.insert(productMapper.fromPostDto(dto)), HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -59,9 +59,9 @@ public class OrderController {
     }
 
     @PutMapping()
-    public ResponseEntity<Order> update(@RequestBody PatchOrderDto dto) {
+    public ResponseEntity<Product> update(@RequestBody PatchProductDto dto) {
         try {
-            return new ResponseEntity<>(orderService.update(orderMapper.fromPatchDto(dto)), HttpStatus.OK);
+            return new ResponseEntity<>(productService.update(productMapper.fromPatchDto(dto)), HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {

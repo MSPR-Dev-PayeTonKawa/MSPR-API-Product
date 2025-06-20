@@ -1,4 +1,4 @@
-package com.payetonkawa.order.dto;
+package com.payetonkawa.product.dto;
 
 import java.sql.Date;
 
@@ -9,7 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostOrderDto {
+public class PatchProductDto {
+    private Integer idProduct;
+    
     private String lastname;
 
     private String firstname;

@@ -1,4 +1,4 @@
-package com.payetonkawa.order.entity;
+package com.payetonkawa.product.entity;
 
 import java.sql.Date;
 
@@ -13,11 +13,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Order {
+public class Product {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_order")
-    private Integer idOrder;
+    @Column(name="id_product")
+    private Integer idProduct;
 
     @Column(name="lastname")
     private String lastname;
