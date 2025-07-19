@@ -1,13 +1,11 @@
 package com.payetonkawa.product.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<List<Product>> findAll() {
         try {
-            return new ResponseEntity<>(productService.findall(), HttpStatus.OK);
+            return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
