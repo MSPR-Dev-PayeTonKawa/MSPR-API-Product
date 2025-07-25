@@ -54,6 +54,7 @@ public class ProductController {
         try {
             return new ResponseEntity<>(productService.insert(productMapper.fromPostDto(dto)), HttpStatus.OK);
         } catch (IllegalStateException e) {
+            log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -66,6 +67,7 @@ public class ProductController {
         try {
             return new ResponseEntity<>(productService.update(productMapper.fromPatchDto(dto)), HttpStatus.OK);
         } catch (IllegalStateException e) {
+            log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             log.error(e.getMessage());
