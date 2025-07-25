@@ -19,21 +19,12 @@ public class Product {
     @Column(name="id_product")
     private Integer idProduct;
 
-    @Column(name="lastname")
-    private String lastname;
+    @Column(name="libelle")
+    private String libelle;
 
-    @Column(name="firstname")
-    private String firstname;
+    @Column(name="stock")
+    private Integer stock;
 
-    @Column(name="address")
-    private String address;
-
-    @Column(name="email")
-    private String email;
-
-    @Column(name="phone_number")
-    private String phoneNumber;
-
-    @Column(name="date_of_creation")
-    private Date dateOfCreation;
+    @Column(name="unit_price")
+    private String unitPrice;
 }

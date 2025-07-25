@@ -2,6 +2,7 @@ package com.payetonkawa.product.dto;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,16 +12,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PatchProductDto {
     private Integer idProduct;
-    
-    private String lastname;
 
-    private String firstname;
+    private String libelle;
 
-    private String address;
+    private Integer stock;
 
-    private String email;
-
-    private String phoneNumber;
-
-    private Date dateOfCreation;
+    private Integer unitPrice;
 }
