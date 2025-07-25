@@ -10,4 +10,6 @@ import com.payetonkawa.product.entity.Product;
 public interface ProductMapper {
     Product fromPostDto(PostProductDto postProductDto);
     Product fromPatchDto(PatchProductDto patchProductDto);
+    PostProductDto toPostDto(Product product);
+    PatchProductDto toPatchDto(Product product);
 }

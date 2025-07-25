@@ -26,5 +26,5 @@ public class Product {
     private Integer stock;
 
     @Column(name="unit_price")
-    private String unitPrice;
+    private Integer unitPrice;
 }
